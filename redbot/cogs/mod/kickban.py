@@ -743,7 +743,7 @@ class KickBanMixin(MixinMeta):
             return
         except discord.HTTPException:
             log.exception(
-                "%s (%s) attempted to softban %s (%s), but an error occurred trying to ban them.",
+                "%s (%s) attempted to softban %s (%s), but an error occurred trying to ban him/her.",
                 author,
                 author.id,
                 member,
@@ -755,7 +755,7 @@ class KickBanMixin(MixinMeta):
         except discord.HTTPException:
             log.exception(
                 "%s (%s) attempted to softban %s (%s),"
-                " but an error occurred trying to unban them.",
+                " but an error occurred trying to unban him/her.",
                 author,
                 author.id,
                 member,
@@ -974,7 +974,7 @@ class KickBanMixin(MixinMeta):
             user = ctx.bot.get_user(user_id)
             if not user:
                 await ctx.send(
-                    _("I do not share another server with this user. I cannot reinvite them.")
+                    _("I do not share another server with this user. I cannot reinvite him/her.")
                 )
                 return
 
