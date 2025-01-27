@@ -127,7 +127,7 @@ class KickBanMixin(MixinMeta):
             if author == user:
                 return (
                     False,
-                    _("I cannot let you do that. Self-harm is bad {}").format("\N{PENSIVE FACE}"),
+                    _("I cannot let you do that. Self-harm is bad. {}").format("\N{PENSIVE FACE}"),
                 )
             elif not await is_allowed_by_hierarchy(self.bot, self.config, guild, author, user):
                 return (
@@ -312,7 +312,7 @@ class KickBanMixin(MixinMeta):
 
         if author == member:
             await ctx.send(
-                _("I cannot let you do that. Self-harm is bad {emoji}").format(
+                _("I cannot let you do that. Self-harm is bad. {emoji}").format(
                     emoji="\N{PENSIVE FACE}"
                 )
             )
@@ -622,7 +622,7 @@ class KickBanMixin(MixinMeta):
 
         if author == member:
             await ctx.send(
-                _("I cannot let you do that. Self-harm is bad {}").format("\N{PENSIVE FACE}")
+                _("I cannot let you do that. Self-harm is bad. {}").format("\N{PENSIVE FACE}")
             )
             return
         elif not await is_allowed_by_hierarchy(self.bot, self.config, guild, author, member):
@@ -674,7 +674,7 @@ class KickBanMixin(MixinMeta):
         try:
             await guild.ban(member, reason=audit_reason, delete_message_seconds=days * 86400)
         except discord.Forbidden:
-            await ctx.send(_("I can't do that for some reason."))
+            await ctx.send(_("I cannot do that for some reason."))
         except discord.HTTPException:
             await ctx.send(_("Something went wrong while banning."))
         else:
@@ -705,7 +705,7 @@ class KickBanMixin(MixinMeta):
 
         if author == member:
             await ctx.send(
-                _("I cannot let you do that. Self-harm is bad {emoji}").format(
+                _("I cannot let you do that. Self-harm is bad. {emoji}").format(
                     emoji="\N{PENSIVE FACE}"
                 )
             )
@@ -863,7 +863,7 @@ class KickBanMixin(MixinMeta):
         elif needs_undeafen:
             await member.edit(deafen=False, reason=audit_reason)
         else:
-            await ctx.send(_("That user isn't muted or deafened by the server."))
+            await ctx.send(_("That user is not muted or deafened by the server."))
             return
 
         guild = ctx.guild
@@ -974,7 +974,7 @@ class KickBanMixin(MixinMeta):
             user = ctx.bot.get_user(user_id)
             if not user:
                 await ctx.send(
-                    _("I don't share another server with this user. I can't reinvite them.")
+                    _("I do not share another server with this user. I cannot reinvite them.")
                 )
                 return
 
@@ -983,7 +983,7 @@ class KickBanMixin(MixinMeta):
                 try:
                     await user.send(
                         _(
-                            "You've been unbanned from {server}.\n"
+                            "You have been unbanned from {server}.\n"
                             "Here is an invite for that server: {invite_link}"
                         ).format(server=guild.name, invite_link=invite)
                     )
@@ -999,6 +999,6 @@ class KickBanMixin(MixinMeta):
                     await ctx.send(
                         _(
                             "Something went wrong when attempting to send that user "
-                            "an invite. Here's the link so you can try: {invite_link}"
+                            "an invite. Here is the link so you can try: {invite_link}"
                         ).format(invite_link=invite)
                     )
