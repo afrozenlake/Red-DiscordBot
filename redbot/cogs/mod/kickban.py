@@ -30,7 +30,7 @@ class KickBanMixin(MixinMeta):
 
     @staticmethod
     async def get_invite_for_reinvite(ctx: commands.Context, max_age: int = 86400) -> str:
-        """Handles the reinvite logic for getting an invite to send the newly unbanned user"""
+        """Handles the reinvite logic for getting an invite to send the newly unbanned user."""
         guild = ctx.guild
         my_perms: discord.Permissions = guild.me.guild_permissions
         if my_perms.manage_guild or my_perms.administrator:
@@ -200,7 +200,7 @@ class KickBanMixin(MixinMeta):
                 )
                 success_message = _("Done. That felt good.")
             except discord.Forbidden:
-                return False, _("I'm not allowed to do that.")
+                return False, _("I am not allowed to do that.")
             except discord.NotFound:
                 return False, _("User with ID {user_id} not found").format(user_id=user.id)
             except Exception:
@@ -347,7 +347,7 @@ class KickBanMixin(MixinMeta):
             await guild.kick(member, reason=audit_reason)
             log.info("%s (%s) kicked %s (%s)", author, author.id, member, member.id)
         except discord.errors.Forbidden:
-            await ctx.send(_("I'm not allowed to do that."))
+            await ctx.send(_("I am not allowed to do that."))
         except Exception:
             log.exception(
                 "%s (%s) attempted to kick %s (%s), but an error occurred.",
@@ -562,7 +562,7 @@ class KickBanMixin(MixinMeta):
                         )
                         log.info("%s (%s) hackbanned %s", author, author.id, user_id)
                     except discord.NotFound:
-                        errors[user_id] = _("User with ID {user_id} not found").format(
+                        errors[user_id] = _("User with ID {user_id} not found.").format(
                             user_id=user_id
                         )
                         continue
